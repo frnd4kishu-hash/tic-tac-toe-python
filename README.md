@@ -27,9 +27,6 @@ python3 tictactoe.py
 - Blocks you from picking a square that's already taken
 - Win and tie detection
 
-## Known issues
-
-- Picking a number outside 1-9 isn't handled yet.
 
 ## Ideas for later
 

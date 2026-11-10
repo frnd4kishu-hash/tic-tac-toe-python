@@ -27,7 +27,13 @@ player_number = 1
 game_on = True
 moves = 0
 while game_on:
-    position = int(input(f"Player {player_number}, choose your position (1-9): "))
+    position = input(f"Player {player_number}, choose your position (1-9): ")
+    # reject anything that isn't a number from 1 to 9
+    if not position.isdigit() or int(position) < 1 or int(position) > 9:
+        print("Please type a number from 1 to 9.")
+        continue
+
+    position = int(position)
 
     # if the square is already taken, ask again
     if board[position - 1] == player_1 or board[position - 1] == player_2:
