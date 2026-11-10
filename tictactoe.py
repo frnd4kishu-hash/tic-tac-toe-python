@@ -18,101 +18,46 @@ else:
     player_2 = "X"
 
 #------------ Where the game starts (players choose positions)----------------------#
-# player 1 chooses their position
-position = int(input("Player 1, choose your position (1-9): "))
 
-# place the marker on the board
-board[position - 1] = player_1
+current_player = player_1
+player_number = 1
+game_on = True
 
-# print the board after player 1's move
-print(board[0], board[1], board[2])
-print(board[3], board[4], board[5])
-print(board[6], board[7], board[8])
+while game_on:
+    position = int(input(f"Player {player_number}, choose your position (1-9): "))
 
-# player 2 chooses their position
-position = int(input("Player 2, choose your position (1-9): "))
+    # if the square is already taken, ask again
+    if board[position - 1] == player_1 or board[position - 1] == player_2:
+        print("That square is taken, pick another one.")
+        continue
+    
+    board[position - 1] = current_player
+    print(board[0], board[1], board[2])
+    print(board[3], board[4], board[5])
+    print(board[6], board[7], board[8])
 
-# place the marker on the board
-board[position - 1] = player_2
+    # check if the player who moved has won
+    if (board[0] == current_player and board[1] == current_player and board[2] == current_player) or \
+       (board[3] == current_player and board[4] == current_player and board[5] == current_player) or \
+       (board[6] == current_player and board[7] == current_player and board[8] == current_player) or \
+       (board[0] == current_player and board[3] == current_player and board[6] == current_player) or \
+       (board[1] == current_player and board[4] == current_player and board[7] == current_player) or \
+       (board[2] == current_player and board[5] == current_player and board[8] == current_player) or \
+       (board[0] == current_player and board[4] == current_player and board[8] == current_player) or \
+       (board[2] == current_player and board[4] == current_player and board[6] == current_player):
+        print(f"Player {player_number} wins!")
+        game_on = False
 
-# print the board after player 2's move
-print(board[0], board[1], board[2])
-print(board[3], board[4], board[5])
-print(board[6], board[7], board[8])
+    # flip the turn
+    if current_player == player_1:
+        current_player = player_2
+        player_number = 2
+    else:
+        current_player = player_1
+        player_number = 1
 
-# player 1 chooses their position
-position = int(input("Player 1, choose your position (1-9): "))
-
-# place the marker on the board
-board[position - 1] = player_1
-
-# print the board after player 1's move
-print(board[0], board[1], board[2])
-print(board[3], board[4], board[5])
-print(board[6], board[7], board[8])
-
-# player 2 chooses their position
-position = int(input("Player 2, choose your position (1-9): "))
-
-# place the marker on the board
-board[position - 1] = player_2
-
-# print the board after player 2's move
-print(board[0], board[1], board[2])
-print(board[3], board[4], board[5])
-print(board[6], board[7], board[8])
-
-# player 1 chooses their position
-position = int(input("Player 1, choose your position (1-9): "))
-
-# place the marker on the board
-board[position - 1] = player_1
-
-# print the board after player 1's move
-print(board[0], board[1], board[2])
-print(board[3], board[4], board[5])
-print(board[6], board[7], board[8])
-
-# player 2 chooses their position
-position = int(input("Player 2, choose your position (1-9): "))
-
-# place the marker on the board
-board[position - 1] = player_2
-
-# print the board after player 2's move
-print(board[0], board[1], board[2])
-print(board[3], board[4], board[5])
-print(board[6], board[7], board[8])
-
-
-#------------------------- Check for a winner -------------------------#
-# check for player 1's win
-if (board[0] == player_1 and board[1] == player_1 and board[2] == player_1) or \
-   (board[3] == player_1 and board[4] == player_1 and board[5] == player_1) or \
-   (board[6] == player_1 and board[7] == player_1 and board[8] == player_1) or \
-   (board[0] == player_1 and board[3] == player_1 and board[6] == player_1) or \
-   (board[1] == player_1 and board[4] == player_1 and board[7] == player_1) or \
-   (board[2] == player_1 and board[5] == player_1 and board[8] == player_1) or \
-   (board[0] == player_1 and board[4] == player_1 and board[8] == player_1) or \
-   (board[2] == player_1 and board[4] == player_1 and board[6] == player_1):
-    print("Player 1 wins!")
-
-
-# check for player 2's win
-if (board[0] == player_2 and board[1] == player_2 and board[2] == player_2) or \
-   (board[3] == player_2 and board[4] == player_2 and board[5] == player_2) or \
-   (board[6] == player_2 and board[7] == player_2 and board[8] == player_2) or \
-   (board[0] == player_2 and board[3] == player_2 and board[6] == player_2) or \
-   (board[1] == player_2 and board[4] == player_2 and board[7] == player_2) or \
-   (board[2] == player_2 and board[5] == player_2 and board[8] == player_2) or \
-   (board[0] == player_2 and board[4] == player_2 and board[8] == player_2) or \
-   (board[2] == player_2 and board[4] == player_2 and board[6] == player_2):
-    print("Player 2 wins!")
 
 
 # check for a tie
-if "-" not in board:
-    print("It's a tie!")
 
-
-# ------------------------- End of the game -------------------------#
+# ------------------------- End of the game --------------------------
